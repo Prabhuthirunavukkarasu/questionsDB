@@ -19,13 +19,13 @@ export class CatagoriesComponent implements OnInit {
   ngOnInit(): void {
     this.catagory = new catagory();
     this.catagories = [];
-    this.getAllMembers();
+    this.getAllCatagories();
   }
 
   /**
    * Gets All Catagories
    */
-  getAllMembers() {
+  getAllCatagories() {
     this.catagoryService.getAll().subscribe(
       (response) => {
         this.catagories = response;
@@ -37,7 +37,7 @@ export class CatagoriesComponent implements OnInit {
     )
   }
 
-  createNewMember() {
+  createNewCatagory() {
     this.catagoryService.create(this.catagory).subscribe(
       (response) => {
         this.catagories.push(response);
@@ -50,10 +50,10 @@ export class CatagoriesComponent implements OnInit {
     this.cancelModel();
   }
 
-  deleteMember(id: string) {
+  deleteCatagory(id: string) {
     this.catagoryService.delete(id).subscribe(
       (response) => {
-        this.getAllMembers();
+        this.getAllCatagories();
       },
       (err) => {
         console.log(err.message);
@@ -62,10 +62,10 @@ export class CatagoriesComponent implements OnInit {
     )
   }
 
-  updateMember() {
+  updateCatagory() {
     this.catagoryService.update(this.catagory, this.catagory._id).subscribe(
       (response) => {
-        this.getAllMembers();
+        this.getAllCatagories();
       },
       (err) => {
         console.log(err.message);

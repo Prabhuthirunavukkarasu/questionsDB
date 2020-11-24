@@ -1,0 +1,167 @@
+<div>
+ <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+  <h6 class="navbar-brand">Catagories</h6>
+  <button type="button" class="btn btn-secondary">Create</button>
+ </nav>
+</div>
+<div class="table-responsive-md">
+  <table class="table table-striped">
+      <thead>
+          <tr>
+              <th>S.NO</th>
+              <th>Name</th>
+              <th>Edit</th>
+              <th>Delete</th>
+          </tr>
+      </thead>
+      <tbody>
+          
+          <tr *ngFor="let member of members">
+              <td>1</td>
+              <td>Aptitude</td>
+              <td><a (click)="openEditModel(true,member)"><i class="fa fa-eraser" aria-hidden="true"></i></a></td>
+              <td><a (click)="deleteMember(member._id)"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+          </tr>
+      </tbody>
+  </table>
+</div>
+
+<!-- The Add Modal -->
+<div class="modal fade" id="addModal" [ngStyle]="{'display': showAddModal ? 'block' : 'none', 'opacity': 1}">
+  <div class="modal-dialog">
+      <div class="modal-content">
+
+          <!-- Modal Header -->
+          <div class="modal-header">
+              <h4 class="modal-title">Add Member</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+
+          <!-- Modal body -->
+          <div class="modal-body">
+              <div class="container-fluid bg-light py-3">
+                  <form id="contact-form" method="post" action="contact.php" role="form">
+                      <div class="addresss"></div>
+                      <div class="controls">
+                          <div class="row">
+                              <div class="col-sm-4">
+                                  <div class="form-group">
+                                      <label for="form_name">Name </label>
+                                      <input id="form_name" type="text" name="name" class="form-control"
+                                          placeholder="Name" [(ngModel)]="member.name">
+                                      <div class="help-block with-errors"></div>
+                                  </div>
+                              </div>
+                              <div class="col-sm-4">
+                                  <div class="form-group">
+                                      <label for="form_email">Father Name </label>
+                                      <input id="form_email" type="text" name="fatherName" class="form-control"
+                                          placeholder="Father name" [(ngModel)]="member.fatherName">
+                                      <div class="help-block with-errors"></div>
+                                  </div>
+                              </div>
+                              <div class="col-sm-4">
+                                  <div class="form-group">
+                                      <label for="form_contact">Contact</label>
+                                      <input id="form_contact" type="number" name="contact" class="form-control"
+                                          placeholder="Contact number" [(ngModel)]="member.contact">
+                                      <div class="help-block with-errors"></div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="clearfix"></div>
+
+                      <div class="row">
+                          <div class="col-md-12">
+                              <div class="form-group">
+                                  <label for="form_address">Address </label>
+                                  <textarea id="form_address" name="address" class="form-control"
+                                      placeholder="Address" rows="4" [(ngModel)]="member.address"></textarea>
+                                  <div class="help-block with-errors"></div>
+                              </div>
+                          </div>
+                      </div>
+                  </form>
+              </div>
+          </div>
+
+          <!-- Modal footer -->
+          <div class="modal-footer">
+              <button type="button" class="btn btn-danger" (click)="cancelModel()">Cancel</button>
+              <button type="button" class="btn btn-success" (click)="createNewMember()">Save</button>
+          </div>
+
+      </div>
+  </div>
+</div>
+
+<!-- The Edit Modal -->
+<div class="modal fade" id="editModal" [ngStyle]="{'display': showEditModal ? 'block' : 'none', 'opacity': 1}">
+  <div class="modal-dialog">
+      <div class="modal-content">
+
+          <!-- Modal Header -->
+          <div class="modal-header">
+              <h4 class="modal-title">Update Member</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+
+          <!-- Modal body -->
+          <div class="modal-body">
+              <div class="container-fluid bg-light py-3">
+                  <form id="contact-form" method="post" action="contact.php" role="form">
+                      <div class="addresss"></div>
+                      <div class="controls">
+                          <div class="row">
+                              <div class="col-sm-4">
+                                  <div class="form-group">
+                                      <label for="form_name">Name </label>
+                                      <input id="form_name" type="text" name="name" class="form-control"
+                                          placeholder="Name" [(ngModel)]="member.name">
+                                      <div class="help-block with-errors"></div>
+                                  </div>
+                              </div>
+                              <div class="col-sm-4">
+                                  <div class="form-group">
+                                      <label for="form_email">Father Name </label>
+                                      <input id="form_email" type="text" name="fatherName" class="form-control"
+                                          placeholder="Father name" [(ngModel)]="member.fatherName">
+                                      <div class="help-block with-errors"></div>
+                                  </div>
+                              </div>
+                              <div class="col-sm-4">
+                                  <div class="form-group">
+                                      <label for="form_contact">Contact</label>
+                                      <input id="form_contact" type="number" name="contact" class="form-control"
+                                          placeholder="Contact number" [(ngModel)]="member.contact">
+                                      <div class="help-block with-errors"></div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="clearfix"></div>
+
+                      <div class="row">
+                          <div class="col-md-12">
+                              <div class="form-group">
+                                  <label for="form_address">Address </label>
+                                  <textarea id="form_address" name="address" class="form-control"
+                                      placeholder="Address" rows="4" [(ngModel)]="member.address"></textarea>
+                                  <div class="help-block with-errors"></div>
+                              </div>
+                          </div>
+                      </div>
+                  </form>
+              </div>
+          </div>
+
+          <!-- Modal footer -->
+          <div class="modal-footer">
+              <button type="button" class="btn btn-danger" (click)="cancelModel()">Cancel</button>
+              <button type="button" class="btn btn-success" (click)="updateMember()">Update</button>
+          </div>
+
+      </div>
+  </div>
+</div>

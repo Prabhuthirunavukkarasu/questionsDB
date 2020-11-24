@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { catagory } from '../catagories/service/catagory.model';
+import { CatagoryService } from '../catagories/service/catagory.service';
 import { topic } from './service/topic.model';
 import { TopicService } from './service/topic.service';
 
@@ -14,18 +16,35 @@ export class TopicsComponent implements OnInit {
   public searchText: string;
   public showAddModal: boolean;
   public showEditModal: boolean;
-  constructor(private topicService: TopicService) { }
+  public catagories: catagory[];
+
+  constructor(private topicService: TopicService,
+     private catagoryService: CatagoryService) { }
 
   ngOnInit(): void {
     this.topic = new topic();
     this.topics = [];
-    this.getAllCatagories();
+    this.getAllTopics();
+    this.catagories = this.getCatagories();
+  }
+
+  getCatagories(): catagory[] {
+    this.catagoryService.getAll().subscribe(
+      (response) => {
+        this.catagories = response;
+      },
+      (err) => {
+        console.log(err.message);
+        alert("Couldn't retreive data from server.");
+      }
+    )
+    return this.catagories || [];
   }
 
   /**
-   * Gets All Catagories
+   * Gets All topics
    */
-  getAllCatagories() {
+  getAllTopics() {
     this.topicService.getAll().subscribe(
       (response) => {
         this.topics = response;
@@ -37,7 +56,7 @@ export class TopicsComponent implements OnInit {
     )
   }
 
-  createNewCatagory() {
+  createNewTopic() {
     this.topicService.create(this.topic).subscribe(
       (response) => {
         this.topics.push(response);
@@ -50,10 +69,10 @@ export class TopicsComponent implements OnInit {
     this.cancelModel();
   }
 
-  deleteCatagory(id: string) {
+  deleteTopic(id: string) {
     this.topicService.delete(id).subscribe(
       (response) => {
-        this.getAllCatagories();
+        this.getAllTopics();
       },
       (err) => {
         console.log(err.message);
@@ -62,10 +81,10 @@ export class TopicsComponent implements OnInit {
     )
   }
 
-  updateCatagory() {
+  updateTopic() {
     this.topicService.update(this.topic, this.topic._id).subscribe(
       (response) => {
-        this.getAllCatagories();
+        this.getAllTopics();
       },
       (err) => {
         console.log(err.message);

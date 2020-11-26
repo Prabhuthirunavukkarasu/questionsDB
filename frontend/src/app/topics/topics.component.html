@@ -58,11 +58,20 @@
                                     <div class="form-group dropdown">
                                         <label for="form_name">Catagory </label>
                                         <button class="btn btn-primary dropdown-toggle" type="button"
-                                            data-toggle="dropdown">Select Catagory
-                                            <span class="caret"></span></button>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item">HTML</a></li>
-                                        </ul>
+                                            data-toggle="dropdown">
+                                            <div>
+                                                <span *ngIf="!topic.catagory">Pick Catagory</span>
+                                                <span *ngIf="topic.catagory">{{topic.catagory.name}}</span>
+                                            </div>
+                                            <span class="caret"></span>
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <div *ngFor="let catagory of catagories">
+                                                <a class="dropdown-item"
+                                                    (click)="selectCatagory(catagory)">{{catagory.name}}</a>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>

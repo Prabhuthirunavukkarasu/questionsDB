@@ -17,6 +17,7 @@ export class TopicsComponent implements OnInit {
   public showAddModal: boolean;
   public showEditModal: boolean;
   public catagories: catagory[];
+  public selectedCatagory: catagory;
 
   constructor(private topicService: TopicService,
      private catagoryService: CatagoryService) { }
@@ -110,6 +111,10 @@ export class TopicsComponent implements OnInit {
     this.topic = new topic();
     this.showAddModal = false;
     this.showEditModal = false;
+  }
+
+  selectCatagory(catagory: catagory) {
+    this.topic.catagory = catagory;
   }
 
 

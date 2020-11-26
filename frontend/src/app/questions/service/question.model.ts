@@ -10,7 +10,7 @@ export class question {
     public topic: topic
 }
 
-class option {
+export class option {
     key: string;
     value: string;
 }

@@ -3,6 +3,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { NgSelectModule } from '@ng-select/ng-select';
+import {MultiSelectModule} from 'primeng/multiselect';
 
 import { AppComponent } from './app.component';
 import { CatagoriesComponent } from './catagories/catagories.component';
@@ -26,7 +29,10 @@ import { FooterComponent } from './footer/footer.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgSelectModule,
+    NgMultiSelectDropDownModule.forRoot(),
+    MultiSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

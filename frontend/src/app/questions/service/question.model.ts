@@ -7,7 +7,7 @@ export class question {
     public answer: option[];
     public solution: string;
     public askedIn: string[];
-    public topic: topic
+    public topic: topic[]
 }
 
 export class option {

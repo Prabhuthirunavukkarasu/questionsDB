@@ -15,7 +15,6 @@
       </tr>
     </thead>
     <tbody>
-
       <tr *ngFor="let question of questions;index as i">
         <td>{{i + 1}}</td>
         <td>{{question.quest}}</td>
@@ -39,7 +38,7 @@
       <!-- Modal body -->
       <div class="modal-body">
         <div class="container-fluid bg-light py-3">
-          <form id="contact-form" method="post" role="form">
+          <form id="questionsForm">
             <div class="addresss"></div>
             <div class="controls">
               <div class="row">
@@ -48,17 +47,17 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text font-weight-bold">Question</span>
                     </div>
-                    <textarea id="form_name" type="text" name="quest" [(ngModel)]="question.quest" class="form-control"
-                      aria-label="With textarea"></textarea>
+                    <textarea id="form_name" wrap="hard" type="text" name="quest" [(ngModel)]="question.quest"
+                      class="form-control" aria-label="With textarea"></textarea>
                     <div class="help-block with-errors"></div>
                   </div>
                 </div>
               </div>
               <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-12">
                   <div class="form-group">
                     <span>
-                      <label for="form_name" class="font-weight-bold">Options </label>
+                      <label for="form_name" class="font-weight-bold">Add Options </label>
                       <button type="button" class="btn pull-right btn-primary btn-sm" (click)="addOption()">Add</button>
                     </span>
                     <div *ngFor="let option of question.options;index as i">
@@ -80,20 +79,47 @@
                     <div class="help-block with-errors"></div>
                   </div>
                 </div>
-                <div class="col-sm-6">
-                  <ng-multiselect-dropdown [placeholder]="'Select Answer'" [data]="question.options"
-                    [(ngModel)]="question.answer" [settings]="dropdownAnswerSettings" name="quesAnswer">
-                  </ng-multiselect-dropdown>
-                </div>
               </div>
               <div class="row">
                 <div class="col-sm-6">
-                  <ng-multiselect-dropdown [placeholder]="'Select Topic'" [data]="topics" [(ngModel)]="question.topic"
-                    [settings]="dropdownTopicSettings" name="topic">
+                  <label for="form_topic" class="font-weight-bold">Select Topic </label>
+                  <ng-multiselect-dropdown #multiSelect [placeholder]="'Select topic'" [data]="topics"
+                    [formControl]="f.topic" [settings]="settings" (onSelect)="onItemSelect($event)">
                   </ng-multiselect-dropdown>
                 </div>
-                <div class="col-sm-6">
-                  <p-multiSelect [options]="topics"  [(ngModel)]="question.topic" optionLabel="name"></p-multiSelect>
+                <div class="col-sm-6" *ngIf="canVisibleAnswerOptions">
+                  <label for="form_answer" class="font-weight-bold">Select Answer options</label>
+                  <ng-multiselect-dropdown #multiSelect [placeholder]="'Select answer options'" [data]="ansOptions"
+                    [formControl]="f.answer" [settings]="ansSettings">
+                  </ng-multiselect-dropdown>
+                </div>
+              </div><br>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text font-weight-bold">Solution</span>
+                    </div>
+                    <textarea id="form_solution" wrap="hard" type="text" name="solution" [(ngModel)]="question.solution"
+                      class="form-control" aria-label="With textarea"></textarea>
+                    <div class="help-block with-errors"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="editor-tag" (click)="focusTagInput()">
+                    <span class="tag-item" *ngFor="let tag of tags; let i = index">
+                            {{tag}}
+                            <span class="remove-tag" (click)="removeTag(i)">×</span>
+                          </span>
+                          <input
+                          placeholder="Asked in"
+                          #tagInput type="text"
+                          class="input-tag"
+                          (keyup)="onKeyUp($event)"
+                          [formControl]="f.tag">
+                        </div>
                 </div>
               </div>
             </div>
@@ -105,7 +131,7 @@
       <!-- Modal footer -->
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" (click)="cancelModel()">Cancel</button>
-        <button type="button" class="btn btn-success" (click)="createNewTopic()">Save</button>
+        <button type="button" class="btn btn-success" (click)="save()">Save</button>
       </div>
 
     </div>

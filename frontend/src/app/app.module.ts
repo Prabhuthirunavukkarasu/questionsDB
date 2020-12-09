@@ -1,11 +1,12 @@
 import { BrowserModule} from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
+// import { NgSelectModule } from '@ng-select/ng-select';
+// import {MultiSelectModule} from 'primeng/multiselect';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
-import { NgSelectModule } from '@ng-select/ng-select';
-import {MultiSelectModule} from 'primeng/multiselect';
+import { CommonModule } from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { CatagoriesComponent } from './catagories/catagories.component';
@@ -29,10 +30,10 @@ import { FooterComponent } from './footer/footer.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    CommonModule,
     FormsModule,
-    NgSelectModule,
-    NgMultiSelectDropDownModule.forRoot(),
-    MultiSelectModule
+    NgMultiSelectDropDownModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

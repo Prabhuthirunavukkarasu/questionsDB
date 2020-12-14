@@ -3,13 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "build": "cd frontend && npm run build",
-    "install": "cd frontend && npm install",
-    "start": "node app",
-    "server": "nodemon app",
-    "client": "npm start --prefix frontend",
-    "dev": "concurrently \"npm run app\" \"npm run frontend\"",
-    "localstart": "node ./bin/www"
+    "start": "node app.js"
   },
   "dependencies": {
     "body-parser": "~1.13.2",

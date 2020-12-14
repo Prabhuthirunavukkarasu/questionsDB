@@ -1,1 +1,1 @@
-web: node app.js
+web: cd frontend && ng build && node ../app.js

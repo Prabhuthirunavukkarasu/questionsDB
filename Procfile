@@ -1,1 +1,1 @@
-web: cd frontend && npm run build && node ../app.js
+web: cd frontend && npm install && npm run build && node ../app.js

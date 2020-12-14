@@ -114,6 +114,16 @@ export class QuestionsComponent implements OnInit {
   get f() { return this.form.controls; }
 
   public save() {
+    this.constructQuestion();
+    this.createNewQuestion();
+  }
+
+  public update() {
+    this.constructQuestion();
+    this.updateQuestion();
+  }
+
+  private constructQuestion() {
     this.questionToBeSave = {
       quest : this.question.quest,
       topic : this.form.controls.topic.value,
@@ -129,7 +139,7 @@ export class QuestionsComponent implements OnInit {
       this.questionToBeSave.askedIn.push(this.tags[index]);
     }
     console.log(this.questionToBeSave);
-    this.createNewQuestion();
+    return this.questionToBeSave;
   }
 
   public onItemSelect(topic: topic) {
@@ -220,10 +230,6 @@ export class QuestionsComponent implements OnInit {
     this.question = new question();
     this.showAddModal = false;
     this.showEditModal = false;
-  }
-
-  selectTopic(topic: topic) {
-
   }
 
   addOption() {
